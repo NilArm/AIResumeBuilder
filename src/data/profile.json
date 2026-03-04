@@ -1,0 +1,102 @@
+{
+    "name": "Nilesh Armal",
+    "title": "Backend Developer",
+    "company": "Accenture Solutions Pvt. Ltd.",
+    "experience_years": "4+",
+    "phone": "+91 9689989399",
+    "email": "nilesh.armal248@gmail.com",
+    "github": "github.com/NilArm",
+    "linkedin": "linkedin.com/in/nilarm",
+    "leetcode": "leetcode.com/Nil24",
+    "summary": "Backend Engineer with 4+ years building high-throughput e-commerce systems at scale. Architected 30+ microservices processing 120K+ orders/day and 6K+ API requests/min using Java and Spring Boot. Achieved 81% improvement in database write performance for datasets with 1M+ records. Expertise in event-driven architectures, SQL optimization, and cloud-native deployments. GCP Certified Associate Cloud Engineer.",
+    "experience": [
+        {
+            "role": "Backend Developer [Spring Boot]",
+            "company": "Accenture Solutions Pvt. Ltd.",
+            "domain": "E-Commerce & Retail",
+            "dates": "Jan 2022 – Present",
+            "bullets": [
+                "Architected and maintained 30+ microservices powering an e-commerce platform processing 120K+ orders/day, serving 2M+ users with 6K+ API requests/min.",
+                "Achieved 81% improvement in data persistence performance for MySQL tables with 1M+ records by optimizing batch operations, indexing strategies, and query execution plans. Reduced API response times by 60%.",
+                "Designed event-driven architecture using Solace messaging queues and JMS listeners for asynchronous order processing, inventory updates, and real-time notification delivery across distributed services.",
+                "Led backend design for a customer-facing feature adopted by 2M+ users, owning the full lifecycle from technical design to production deployment and monitoring.",
+                "Implemented caching with Redis and applied design patterns (Facade, Strategy) to reduce redundant database calls and improve service response consistency.",
+                "Built CI/CD pipelines with Jenkins and containerized services using Docker/Kubernetes, achieving 90%+ unit test coverage with JUnit and integration tests."
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "name": "Personalised Notification and Alerting Platform",
+            "tech": "Spring Boot, Solace, MySQL, Redis, Docker, Kubernetes",
+            "bullets": [
+                "Designed and developed a multi-channel notification platform supporting Email, SMS, and Push delivery, processing 500K+ notifications/day with 99.9% delivery rate.",
+                "Implemented Solace-based event-driven architecture with retry mechanisms and Dead Letter Queue (DLQ) handling for guaranteed message delivery.",
+                "Built a user preference engine with channel-specific personalization and automatic fallback routing (e.g., SMS → Email on delivery failure).",
+                "Containerized services with Docker and deployed via Kubernetes, enabling horizontal auto-scaling and zero-downtime deployments."
+            ]
+        },
+        {
+            "name": "Developer Portfolio Website",
+            "tech": "React, Vite, CSS3, Responsive Design",
+            "bullets": [
+                "Built a developer-themed portfolio with terminal-inspired UI, interactive API playground, and integrated resume viewer with command palette (Ctrl+K).",
+                "Implemented boot sequence animations, JSON-formatted contact form, and code-styled project showcases for a unique developer experience.",
+                "Optimized for performance and SEO with lazy loading, semantic HTML, and responsive design across all devices."
+            ]
+        }
+    ],
+    "skills": {
+        "Languages": [
+            "Java",
+            "C++"
+        ],
+        "Frameworks": [
+            "Spring Boot",
+            "Spring Cloud",
+            "JPA/Hibernate",
+            "JMS",
+            "JUnit"
+        ],
+        "Architecture": [
+            "Microservices",
+            "Event-Driven Architecture",
+            "REST APIs",
+            "Design Patterns (Facade, Strategy)"
+        ],
+        "Databases": [
+            "MySQL",
+            "PostgreSQL",
+            "Redis"
+        ],
+        "Cloud & DevOps": [
+            "GCP",
+            "Docker",
+            "Kubernetes",
+            "Jenkins",
+            "GitHub Actions",
+            "CI/CD",
+            "Git"
+        ],
+        "Tools": [
+            "Swagger/OpenAPI",
+            "Postman",
+            "JIRA",
+            "IntelliJ IDEA",
+            "Solace"
+        ]
+    },
+    "certifications": [
+        {
+            "name": "Associate Cloud Engineer — Google Cloud Platform (GCP)",
+            "year": "2026 – 2029"
+        }
+    ],
+    "education": [
+        {
+            "degree": "B.E. Computer Science and Engineering",
+            "institution": "Government College of Engineering, Amravati",
+            "year": "2017 – 2021"
+        }
+    ]
+}
