@@ -153,3 +153,34 @@ Generate the prep guide JSON now:`;
 
   return callGemini(prompt);
 }
+
+export async function refineResumeWithChat(currentResume, jobDescription, chatHistory) {
+  const conversationContext = chatHistory
+    .map(msg => `${msg.role === 'user' ? 'USER' : 'ASSISTANT'}: ${msg.content}`)
+    .join('\n');
+
+  const prompt = `You are an expert resume writer and ATS optimization specialist. The user has already generated a tailored resume and is now refining it through a conversation.
+
+RULES:
+1. ONLY use information from the candidate's actual profile — NEVER fabricate skills, experiences, or metrics.
+2. Apply the user's requested changes to the resume while keeping all claims truthful.
+3. Maintain the same JSON structure as the original resume.
+4. NEVER use markdown formatting like **bold**, *italic*, or any other markup in the text content. All text must be plain text only.
+5. Include a "chatResponse" field with a brief, friendly confirmation of what you changed (1-2 sentences max).
+
+CURRENT RESUME:
+${JSON.stringify(currentResume, null, 2)}
+
+CANDIDATE PROFILE:
+${JSON.stringify(profile, null, 2)}
+
+JOB DESCRIPTION:
+${jobDescription}
+
+CONVERSATION HISTORY:
+${conversationContext}
+
+Apply the user's latest request and return the FULL updated resume JSON with the same structure as before, plus a "chatResponse" field describing what changed. Return ONLY valid JSON (no markdown, no code fences).`;
+
+  return callGemini(prompt);
+}

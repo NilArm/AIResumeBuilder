@@ -3,7 +3,8 @@ import JDInput from './components/JDInput';
 import ResumePreview from './components/ResumePreview';
 import MatchInsights from './components/MatchInsights';
 import PrepGuide from './components/PrepGuide';
-import { generateTailoredResume, regenerateWithSkills, generatePrepGuide } from './services/aiService';
+import ResumeChat from './components/ResumeChat';
+import { generateTailoredResume, regenerateWithSkills, generatePrepGuide, refineResumeWithChat } from './services/aiService';
 import { exportToPdf } from './utils/pdfExport';
 
 export default function App() {
@@ -16,11 +17,14 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('resume'); // 'resume' | 'prep'
   const [prepData, setPrepData] = useState(null);
   const [isPrepLoading, setIsPrepLoading] = useState(false);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [isRefining, setIsRefining] = useState(false);
 
   const handleGenerate = async (jd) => {
     setIsLoading(true);
     setError(null);
     setPrepData(null);
+    setChatHistory([]);
     setActiveTab('resume');
     try {
       const data = await generateTailoredResume(jd);
@@ -45,6 +49,7 @@ export default function App() {
   const handleBack = () => {
     setView('input');
     setPrepData(null);
+    setChatHistory([]);
     setActiveTab('resume');
   };
 
@@ -54,10 +59,31 @@ export default function App() {
       const data = await regenerateWithSkills(currentJD, confirmedSkills);
       setResult(data);
       setPrepData(null); // reset prep since skills changed
+      setChatHistory([]); // reset chat since skills changed
     } catch (err) {
       console.error(err);
     } finally {
       setIsRegenerating(false);
+    }
+  };
+
+  const handleChatRefine = async (message) => {
+    const newHistory = [...chatHistory, { role: 'user', content: message }];
+    setChatHistory(newHistory);
+    setIsRefining(true);
+    try {
+      const data = await refineResumeWithChat(result, currentJD, newHistory);
+      const aiMessage = data.chatResponse || 'Resume updated!';
+      setChatHistory([...newHistory, { role: 'ai', content: aiMessage }]);
+      // Remove chatResponse from result before setting
+      const { chatResponse, ...resumeData } = data;
+      setResult(resumeData);
+      setPrepData(null); // reset prep since resume changed
+    } catch (err) {
+      console.error(err);
+      setChatHistory([...newHistory, { role: 'ai', content: '❌ Failed to refine. Please try again.' }]);
+    } finally {
+      setIsRefining(false);
     }
   };
 
@@ -85,7 +111,7 @@ export default function App() {
       {/* Top Bar */}
       <header className="topbar">
         <div className="topbar-left">
-          <span className="topbar-logo">⚡</span>
+          <img src="/logo.png" alt="ResumeAI" className="topbar-logo-img" />
           <h1 className="topbar-title">ResumeAI</h1>
           <span className="topbar-badge">by Nilesh</span>
         </div>
@@ -147,6 +173,7 @@ export default function App() {
               <div className="result-view">
                 <div className="result-sidebar">
                   <MatchInsights data={result} onRegenerate={handleRegenerate} isRegenerating={isRegenerating} />
+                  <ResumeChat chatHistory={chatHistory} onRefine={handleChatRefine} isRefining={isRefining} />
                 </div>
                 <div className="result-main" style={{ position: 'relative' }}>
                   {isRegenerating && (

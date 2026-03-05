@@ -24,11 +24,11 @@ export default function ResumePreview({ data }) {
                     <h1 className="res-name">{profile.name.toUpperCase()}</h1>
                     <p className="res-title">{clean(d.targetRole)} · {profile.experience_years} Years Experience</p>
                     <div className="res-contact">
-                        <span>{profile.phone}</span>
-                        <span>{profile.email}</span>
-                        <span>{profile.github}</span>
-                        <span>{profile.linkedin}</span>
-                        <span>{profile.leetcode}</span>
+                        <span><a href={`tel:${profile.phone}`}>{profile.phone}</a></span>
+                        <span><a href={`mailto:${profile.email}`}>{profile.email}</a></span>
+                        <span><a href={`https://${profile.github}`} target="_blank" rel="noopener noreferrer">{profile.github}</a></span>
+                        <span><a href={`https://${profile.linkedin}`} target="_blank" rel="noopener noreferrer">{profile.linkedin}</a></span>
+                        <span><a href={`https://${profile.leetcode}`} target="_blank" rel="noopener noreferrer">{profile.leetcode}</a></span>
                     </div>
                 </div>
 
